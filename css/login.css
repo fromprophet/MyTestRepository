@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: "微软雅黑";
+}
+div#header{
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom,#FF6347,#FFFACD);
+    text-align: center;
+    line-height: 200px;
+    font-size: 40px;
+    color: #FFFFFF;
+    letter-spacing: 2em;
+}
+div#loginform{
+    margin-top: 150px;
+}
+div#loginContent{
+    margin: 0 auto;
+    width: 700px;
+}

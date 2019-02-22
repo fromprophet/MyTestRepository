@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>注册用户</title>
+    <link href="css/regist.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header">用户注册</div>
+<div id="registform">
+    <div id="registContent">
+        <form action="regist.php" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="userName" class="col-md-2 control-label">
+                    用户名
+                </label>
+                <div class="col-md-10">
+                    <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入用户名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-md-2 control-label">
+                    密码
+                </label>
+                <div class="col-md-10">
+                    <input type="password" id="password" name="userPassword" class="form-control" placeholder="请输入密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="rePassword" class="col-md-2 control-label">
+                    确认密码
+                </label>
+                <div class="col-md-10">
+                    <input type="password" id="rePassword" class="form-control" placeholder="请重新输入一次密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userGender" class="col-md-2 control-label">
+                    性别
+                </label>
+                <div class="col-md-10">
+                    <select name="userGender" id="userGender" name="userGender" class="form-control">
+                        <option value="男" name="userGender" selected>男</option>
+                        <option value="女" name="userGender">女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="userTel" class="col-md-2 control-label">
+                    联系方式
+                </label>
+                <div class="col-md-10">
+                    <input type="text" id="userTel" name="userTel" class="form-control" placeholder="请输入联系方式">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-7">
+                    <input type="submit" value="注册" id="submit" class="btn btn-primary">
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

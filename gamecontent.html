@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>挖矿游戏</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+    <script type="text/javascript">
+        $youziku.load("body", "845b5c7a894940f4859354559a7371b5", "ShanghaiFace-ZBGB2");
+        $youziku.draw();
+    </script>
+    <script src="js/script.js"></script>
+</head>
+<body>
+<div id="notice">
+    <h3 style="margin-top: 30px;">剩余机会为：</h3><h3 id="chance"></h3>
+</div>
+<div id="details">
+    <h3 style="margin-top: 30px">游戏规则</h3>
+    <h5>有3次挖矿机会</h5>
+    <h5>40%概率金额为0</h5>
+    <h5>60%概率金额为0-3000</h5>
+</div>
+<div class="game_content">
+    <div class="inner_game" id="inner_game">
+        <div class="ground ground1"><span></span></div>
+        <div class="ground ground2"><span></span></div>
+        <div class="ground ground3"><span></span></div>
+        <div class="ground ground4"><span></span></div>
+        <div class="ground ground5"><span></span></div>
+        <div class="ground ground6"><span></span></div>
+        <div class="ground ground7"><span></span></div>
+        <div class="ground ground8"><span></span></div>
+        <div class="ground ground9"><span></span></div>
+        <div class="ground ground10"><span></span></div>
+        <div class="ground ground11"><span></span></div>
+        <div class="ground ground12"><span></span></div>
+    </div>
+    <div class="clb"></div>
+    <h3><span>获得金额为：</span><span id="res"></span></h3>
+
+</div>
+<div class="grade">
+    <form action="gamecontent.php" method="post">
+        <input type="text" name="gameTime" id="gameTime"><br>
+        <input type="text" name="firstCount" id="firstCount"><br>
+        <input type="text" name="secondCount" id="secondCount"><br>
+        <input type="text" name="thirdCount" id="thirdCount"><br>
+        <input type="text" name="gameGrade" id="gameGrade"><br>
+        <input type="submit" value="提交成绩" id="submitGrade">
+    </form>
+</div>
+
+<script>
+    var inner_game = document.getElementById('inner_game');
+    var grounds = inner_game.getElementsByClassName('ground');
+    var chances = document.getElementById('chance');
+    var res = document.getElementById('res');
+    var chance = 3;
+    var counts = new Array();
+    var result = 0;
+   // var userName = document.getElementById('userName');
+    var gameTime = document.getElementById('gameTime');
+    var firstCount = document.getElementById('firstCount');
+    var secondCount = document.getElementById('secondCount');
+    var thirdCount = document.getElementById('thirdCount');
+    var gameGrade = document.getElementById('gameGrade');
+    var submitGrade = document.getElementById('submitGrade');
+    chances.innerHTML = chance;
+
+    //结果设定
+    for (var i = 0;i < grounds.length; i++){
+        var gold;
+        var ramdom_out = Math.random();
+        if (ramdom_out <= 0.4){
+            gold = 0;
+        }
+        else {
+            gold = (Math.round((parseInt(Math.random()*3000))/100))*100;
+        }
+        console.log(i+"   "+gold);
+        grounds[i].childNodes[0].innerHTML = gold;
+        grounds[i].childNodes[0].style.display = 'none';
+        grounds[i].digged = false;
+    }
+
+    for (var i = 0;i < grounds.length;i++) {
+        grounds[i].index = i;
+        grounds[i].onmouseover = function () {
+            grounds[this.index].style.opacity = '0.7';
+        }
+        grounds[i].onmouseout = function () {
+            grounds[this.index].style.opacity = '1';
+        }
+        grounds[i].onclick = function () {
+            if (chance > 0) {
+                if (grounds[this.index].digged == false) {
+                    var count = parseInt(grounds[this.index].childNodes[0].innerHTML);
+                    counts.push(parseInt(count));
+                    grounds[this.index].childNodes[0].style.display = 'block';
+                    result += count;
+                    grounds[this.index].digged = true;
+                    grounds[this.index].style.background = "url('images/digged.png') no-repeat";
+                    grounds[this.index].style.backgroundSize = '100%';
+                    res.innerHTML = result;
+                    chance--;
+                    chances.innerHTML = chance;
+
+                }
+            }
+            else {
+                var time = new Date();
+               // var currUserName = "<?php echo $_SESSION[\"username\"] ?>";
+                var time = new Date();
+                var currTime = time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"+time.getMinutes()+":"+time.getSeconds();
+               // userName.value = currUserName;
+                gameTime.value = currTime;
+                firstCount.value = counts[0];
+                secondCount.value = counts[1];
+                thirdCount.value = counts[2];
+                gameGrade.value = result;
+                submitGrade.style.display = "block";
+            }
+        }
+    }
+</script>
+</body>
+</html>
